@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-ngrx-apollo-example": {
+    "angular-ngrx-example": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-ngrx-apollo-example",
+            "outputPath": "dist/angular-ngrx-example",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-ngrx-apollo-example:build:production"
+              "buildTarget": "angular-ngrx-example:build:production"
             },
             "development": {
-              "buildTarget": "angular-ngrx-apollo-example:build:development"
+              "buildTarget": "angular-ngrx-example:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,5 +92,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

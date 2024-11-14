@@ -1,0 +1,7 @@
+<h2>Item List: </h2>
+<button (click)="onReverseOrder()">Reverse Order</button>
+<div *ngIf="items$ | async as items">
+  <ul>
+    <li *ngFor="let item of items">{{ item.name }}</li>
+  </ul>
+</div>
