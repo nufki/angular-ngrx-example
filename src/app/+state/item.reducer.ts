@@ -45,7 +45,10 @@ export const dataReducer = createReducer(
 
     // Use setAll to update the state with reversed items
     return itemAdapter.setAll(reversedItems, state);
-  })
+  }),
+  on(ItemActions.addItemSuccess, (state, { item }) =>
+    itemAdapter.addOne(item, state)
+  ),
 );
 
 export function itemReducer(state: any, action: any) {

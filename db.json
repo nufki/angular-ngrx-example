@@ -1,14 +1,39 @@
 {
   "items": [
-    { "id": 1, "name": "Item 1" },
-    { "id": 2, "name": "Item 2" },
-    { "id": 3, "name": "Item 3" },
-    { "id": 4, "name": "Item 4" },
-    { "id": 5, "name": "Item 5" },
-    { "id": 6, "name": "Item 6" },
-    { "id": 7, "name": "Item 7" },
-    { "id": 8, "name": "Item 8" },
-    { "id": 9, "name": "Item 9" }, 
-    { "id": 10, "name": "Kei" }
+    {
+      "name": "Quantum Oscillator",
+      "description": "A device that manipulates subatomic particles to generate oscillating energy fields.",
+      "id": "9b76"
+    },
+    {
+      "name": "Nebula Harvester",
+      "description": "An interstellar machine designed to collect and process rare gases from distant nebulae.",
+      "id": "d4c4"
+    },
+    {
+      "name": "Chronosphere",
+      "description": "A spherical apparatus capable of creating localized time dilation effects.",
+      "id": "0d58"
+    },
+    {
+      "name": "Bionic Synapse Enhancer",
+      "description": "An implantable neural interface that accelerates synaptic connections in the brain.",
+      "id": "15ad"
+    },
+    {
+      "name": "Gravity Nullifier",
+      "description": "A compact device that can create zones of zero gravity within a defined area.",
+      "id": "e484"
+    },
+    {
+      "name": "Holographic Memory Crystal",
+      "description": "A crystal matrix capable of storing vast amounts of data in holographic form.",
+      "id": "404a"
+    },
+    {
+      "id": "8d1e",
+      "name": "test 1",
+      "description": "test 1"
+    }
   ]
 }
