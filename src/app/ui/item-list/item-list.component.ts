@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {selectAllItems} from "../../store/item.selectors";
-import {ItemActions} from "../../store/item.actions";
-import {Item} from "../../store/item.model";
+import {selectAllItems} from "../../+state/item.selectors";
+import {ItemActions} from "../../+state/item.actions";
+import {Item} from "../../+state/item.model";
 
 @Component({
   selector: 'app-item-list',
