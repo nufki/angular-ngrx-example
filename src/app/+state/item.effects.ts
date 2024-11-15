@@ -24,6 +24,20 @@ export class ItemEffects implements OnInitEffects {
     { functional: true }
   );
 
+  addItem$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(ItemActions.addItem),
+        mergeMap(({ item }) => this.itemService.addItem(item)
+          .pipe(
+            tap(data => console.log('Added item:', data)),
+            map(addedItem => ItemActions.addItemSuccess({ item: addedItem })),
+            catchError(error => of(ItemActions.addItemFailure({ error: error.message })))
+          )
+        )
+      ),
+    { functional: true }
+  );
+
   ngrxOnInitEffects = () => ItemActions.onInit();
 }
 

@@ -1,7 +1,40 @@
-<h2>Item List: </h2>
-<button (click)="onReverseOrder()">Reverse Order</button>
-<div *ngIf="items$ | async as items">
-  <ul>
-    <li *ngFor="let item of items">{{ item.name }}</li>
-  </ul>
+<div class="container">
+  <h2>Item Management</h2>
+
+  <div class="add-item-form">
+    <h3>Add New Item</h3>
+    <div class="input-group">
+      <label for="itemName">Name:</label>
+      <input
+        id="itemName"
+        type="text"
+        [(ngModel)]="newItemName"
+        placeholder="Enter item name"
+      />
+    </div>
+    <div class="input-group">
+      <label for="itemDescription">Description:</label>
+      <textarea
+        id="itemDescription"
+        [(ngModel)]="newItemDescription"
+        placeholder="Enter item description"
+      ></textarea>
+    </div>
+    <button (click)="onAddItem()">Add Item</button>
+  </div>
+
+  <div class="item-list">
+    <div *ngIf="items$ | async as items">
+      <div class="list-header">
+        <p>Total items: {{ items.length }}</p>
+        <button (click)="onReverseOrder()">Reverse Order</button>
+      </div>
+      <ul>
+        <li *ngFor="let item of items; let i = index">
+          <strong>{{ item.name }}</strong> ({{ i + 1 }}/{{ items.length }})
+          <p>{{ item.description }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

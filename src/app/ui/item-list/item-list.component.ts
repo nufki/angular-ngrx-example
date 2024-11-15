@@ -5,6 +5,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {selectAllItems} from "../../+state/item.selectors";
 import {ItemActions} from "../../+state/item.actions";
 import {Item} from "../../+state/item.model";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-item-list',
@@ -12,13 +13,16 @@ import {Item} from "../../+state/item.model";
   imports: [
     AsyncPipe,
     NgForOf,
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.css'
 })
 export class ItemListComponent implements OnInit {
   items$: Observable<Item[]> | undefined;
+  newItemName: string = '';
+  newItemDescription: string = '';
 
   constructor(private readonly store: Store) {
     this.items$  = this.store.select(selectAllItems);
@@ -31,6 +35,20 @@ export class ItemListComponent implements OnInit {
   onReverseOrder() {
     this.store.dispatch(ItemActions.reverseOrder());  // Dispatch the reverse order action
   }
+
+  onAddItem() {
+    if (this.newItemName.trim() && this.newItemDescription.trim()) {
+      this.store.dispatch(ItemActions.addItem({
+        item: {
+          name: this.newItemName.trim(),
+          description: this.newItemDescription.trim()
+        }
+      }));
+      this.newItemName = '';
+      this.newItemDescription = '';
+    }
+  }
+
 }
 
 

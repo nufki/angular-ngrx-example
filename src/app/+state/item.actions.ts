@@ -10,5 +10,8 @@ export const ItemActions = createActionGroup({
     'Load Items Success': props<{ items: Item[] }>(),
     'Load Items Failure': props<{ error: string }>(),
     'Reverse order': emptyProps,
+    'Add Item': props<{ item: Item }>(),
+    'Add Item Success': props<{ item: Item }>(),
+    'Add Item Failure': props<{ error: string }>(),
   },
 });
