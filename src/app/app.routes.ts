@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
-
-export const routes: Routes = [];
-// import {Routes} from '@angular/router';
-// import {ItemListComponent} from "./task-list/task-list.component";
+// import { Routes } from '@angular/router';
 //
-// export const routes: Routes = [
-//   { path: 'tasks', component: ItemListComponent },
-//   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
-// ];
+// export const routes: Routes = [];
+import {Routes} from '@angular/router';
+import {TaskListComponent} from "./ui/task-list/task-list.component";
+
+export const routes: Routes = [
+  { path: 'tasks', component: TaskListComponent },
+  { path: '', redirectTo: '/tasks', pathMatch: 'full' },
+];
