@@ -109,10 +109,24 @@
           </button>
         </div>
         <ul class="list-group">
-          <li *ngFor="let task of tasks; let i = index" class="list-group-item">
-            <h5 class="mb-1">{{ task.name }}</h5>
-            <small class="text-muted">Task {{ i + 1 }}/{{ tasks.length }}</small>
-            <p class="mb-1">{{ task.description }}</p>
+          <li *ngFor="let task of tasks; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+            <!-- Task Name and Priority -->
+            <div class="task-info">
+              <h5 class="mb-1">{{ task.name }}</h5>
+              <small class="text-muted">Priority: {{ task.priority }}</small>
+            </div>
+
+            <!-- Dot Menu for Details, Edit, Delete -->
+            <div class="dropdown">
+              <button class="btn btn-sm btn-link" type="button" id="taskOptionsMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="taskOptionsMenu">
+                <li><a class="dropdown-item" href="#" (click)="onViewDetails(task)">View Details</a></li>
+                <li><a class="dropdown-item" href="#" (click)="onEditTask(task)">Edit</a></li>
+                <li><a class="dropdown-item" href="#" (click)="onDeleteTask(task)">Delete</a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>

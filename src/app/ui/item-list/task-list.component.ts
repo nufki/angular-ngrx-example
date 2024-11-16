@@ -74,4 +74,20 @@ export class TaskListComponent implements OnInit {
       modal.hide();
     }
   }
+
+  onViewDetails(task: Task) {
+
+  }
+
+  onEditTask(task: Task) {
+
+  }
+
+  onDeleteTask(task: Task) {
+    if (confirm('Are you sure you want to delete this task?')) {
+      if (task?.id) {
+        this.store.dispatch(TaskActions.deleteTask({ id: task.id }));
+      }
+    }
+  }
 }

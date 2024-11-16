@@ -49,6 +49,14 @@ export const dataReducer = createReducer(
   on(TaskActions.addTaskSuccess, (state, { task }) =>
     taskAdapter.addOne(task, state)
   ),
+  // Handle delete task success by filtering out the deleted task
+  on(TaskActions.deleteTaskSuccess, (state, { id }) =>
+    taskAdapter.removeOne(id, state)
+  ),
+  on(TaskActions.deleteTaskFailure, (state, { error }) => ({
+    ...state,
+    error
+  }))
 );
 
 export function taskReducer(state: any, action: any) {

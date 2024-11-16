@@ -79,14 +79,6 @@
       "status": "not-started",
       "priority": "high",
       "dueDate": "2024-12-15"
-    },
-    {
-      "id": "fda0",
-      "name": "Improve UI",
-      "description": "change styleing....",
-      "status": "not-started",
-      "priority": "medium",
-      "dueDate": "2024-12-06"
     }
   ]
 }

@@ -38,6 +38,21 @@ export class TaskEffects implements OnInitEffects {
     { functional: true }
   );
 
+  // Effect to delete a task
+  deleteTask$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(TaskActions.deleteTask),
+        mergeMap(({ id }) => this.itemService.deleteTask(id)
+          .pipe(
+            tap(() => console.log(`Deleted task with id: ${id}`)),
+            map(() => TaskActions.deleteTaskSuccess({ id })), // Dispatch success action with the task id
+            catchError(error => of(TaskActions.deleteTaskFailure({ error: error.message })))
+          )
+        )
+      ),
+    { functional: true }
+  );
+
   ngrxOnInitEffects = () => TaskActions.onInit();
 }
 

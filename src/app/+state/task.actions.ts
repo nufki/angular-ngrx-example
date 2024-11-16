@@ -13,5 +13,8 @@ export const TaskActions = createActionGroup({
     'Add Task': props<{ task: Task }>(),
     'Add Task Success': props<{ task: Task }>(),
     'Add Task Failure': props<{ error: string }>(),
+    'Delete Task': props<{ id: string }>(),
+    'Delete Task Success': props<{ id: string }>(),
+    'Delete Task Failure': props<{ error: string }>(),
   },
 });
