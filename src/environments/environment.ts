@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  itemAPIUrl: 'http://localhost:3000/items',
+  taskAPIUrl: 'http://localhost:3000/tasks',
 };

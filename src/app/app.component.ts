@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ItemListComponent} from "./ui/item-list/item-list.component";
+import {TaskListComponent} from "./ui/item-list/task-list.component";
 
 
 @Component({
@@ -7,7 +7,7 @@ import {ItemListComponent} from "./ui/item-list/item-list.component";
   standalone: true,
   templateUrl: './app.component.html',
   imports: [
-    ItemListComponent
+    TaskListComponent
   ],
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,121 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Task Management</h2>
+
+  <!-- Button to open Add Task Modal -->
+  <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+    Add New Task
+  </button>
+
+  <!-- Add Task Modal -->
+  <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="itemName" class="form-label">Name:</label>
+              <input
+                id="itemName"
+                type="text"
+                class="form-control"
+                [(ngModel)]="newTaskName"
+                name="itemName"
+                placeholder="Enter task name"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="itemDescription" class="form-label">Description:</label>
+              <textarea
+                id="itemDescription"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="newTaskDescription"
+                name="itemDescription"
+                placeholder="Enter task description"
+              ></textarea>
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="mb-3">
+              <label for="taskStatus" class="form-label">Status:</label>
+              <select
+                id="taskStatus"
+                class="form-select"
+                [(ngModel)]="newTaskStatus"
+                name="taskStatus"
+              >
+                <option value="not-started">Not Started</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            <!-- Priority Dropdown -->
+            <div class="mb-3">
+              <label for="taskPriority" class="form-label">Priority:</label>
+              <select
+                id="taskPriority"
+                class="form-select"
+                [(ngModel)]="newTaskPriority"
+                name="taskPriority"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <!-- Due Date Datepicker -->
+            <div class="mb-3">
+              <label for="dueDate" class="form-label">Due Date:</label>
+              <input
+                type="date"
+                id="dueDate"
+                class="form-control"
+                [(ngModel)]="newTaskDueDate"
+                name="dueDate"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onAddTask()">Add Task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner and Task List (unchanged) -->
+  @if (loading$ | async) {
+  <div class="d-flex justify-content-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  }
+  @else {
+    <div *ngIf="tasks$ | async as tasks" class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <p class="mb-0">Total tasks: <strong>{{ tasks.length }}</strong></p>
+          <button (click)="onReverseOrder()" class="btn btn-outline-secondary">
+            Reverse Order
+          </button>
+        </div>
+        <ul class="list-group">
+          <li *ngFor="let task of tasks; let i = index" class="list-group-item">
+            <h5 class="mb-1">{{ task.name }}</h5>
+            <small class="text-muted">Task {{ i + 1 }}/{{ tasks.length }}</small>
+            <p class="mb-1">{{ task.description }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  }
+</div>

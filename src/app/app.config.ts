@@ -7,7 +7,7 @@ import {provideState, provideStore} from '@ngrx/store';
 import {provideStoreDevtools} from '@ngrx/store-devtools';
 import {provideRouterStore, routerReducer} from "@ngrx/router-store";
 import { provideEffects } from '@ngrx/effects';
-import {ItemEffects} from "./+state/item.effects";
+import {TaskEffects} from "./+state/task.effects";
 import {STATE_PROVIDERS} from "./+state/data-access.providers";
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     // provideStore({
     //   [FEATURE_KEY]: itemReducer
     // }),
-    provideEffects([ItemEffects]),
+    provideEffects([TaskEffects]),
     // Wire up feature stores
     STATE_PROVIDERS,
     // Link router store
