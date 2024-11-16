@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {selectAllItems} from "../../+state/item.selectors";
+import {selectAllItems, selectItemLoading} from "../../+state/item.selectors";
 import {ItemActions} from "../../+state/item.actions";
 import {Item} from "../../+state/item.model";
 import {FormsModule} from "@angular/forms";
@@ -17,15 +17,17 @@ import {FormsModule} from "@angular/forms";
     FormsModule
   ],
   templateUrl: './item-list.component.html',
-  styleUrl: './item-list.component.css'
+  styleUrl: './item-list.component.scss'
 })
 export class ItemListComponent implements OnInit {
   items$: Observable<Item[]> | undefined;
+  loading$: Observable<boolean> | undefined;
   newItemName: string = '';
   newItemDescription: string = '';
 
   constructor(private readonly store: Store) {
     this.items$  = this.store.select(selectAllItems);
+    this.loading$ = this.store.select(selectItemLoading)
   }
 
   ngOnInit() {

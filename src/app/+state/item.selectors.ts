@@ -13,3 +13,8 @@ export const selectItemEntities = createSelector(
   selectItemsState,
   (state) => state ? selectEntities(state) : {}
 );
+
+export const selectItemLoading = createSelector(
+  selectItemsState,
+  (state: State) => state.loading,
+);

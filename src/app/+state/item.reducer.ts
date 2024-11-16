@@ -27,7 +27,7 @@ export const dataReducer = createReducer(
   on(ItemActions.loadItemsSuccess, (state, { items }) => {
     return itemAdapter.upsertMany(items, {
       ...state,
-      loading: true,
+      loading: false,
     });
   }),
   on(ItemActions.loadItemsFailure, (state) => {
