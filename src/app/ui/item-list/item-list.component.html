@@ -13,6 +13,7 @@
             type="text"
             class="form-control"
             [(ngModel)]="newItemName"
+            name="itemName"
             placeholder="Enter item name"
           />
         </div>
@@ -23,6 +24,7 @@
             class="form-control"
             rows="3"
             [(ngModel)]="newItemDescription"
+            name="itemDescription"
             placeholder="Enter item description"
           ></textarea>
         </div>
@@ -40,8 +42,7 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-  }
-  @else {
+  } @else {
     <!-- Item List -->
     <div class="item-list card shadow-sm">
       <div class="card-body">
