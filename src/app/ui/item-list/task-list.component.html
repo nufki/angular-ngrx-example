@@ -93,13 +93,12 @@
 
   <!-- Loading Spinner and Task List (unchanged) -->
   @if (loading$ | async) {
-  <div class="d-flex justify-content-center my-4">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <div class="d-flex justify-content-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
-  </div>
-  }
-  @else {
+  } @else {
     <div *ngIf="tasks$ | async as tasks" class="card shadow-sm">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -109,10 +108,18 @@
           </button>
         </div>
         <ul class="list-group">
-          <li *ngFor="let task of tasks; let i = index" class="list-group-item">
-            <h5 class="mb-1">{{ task.name }}</h5>
-            <small class="text-muted">Task {{ i + 1 }}/{{ tasks.length }}</small>
-            <p class="mb-1">{{ task.description }}</p>
+          <li *ngFor="let task of tasks; let i = index" class="list-group-item swipeable-item"
+              [class.swiped-left]="true"
+              (swipeleft)="onSwipeLeft(task)" (swiperight)="onSwipeRight(task)">
+            <div class="task-content">
+              <h5 class="mb-1">{{ task.name }}</h5>
+              <small class="text-muted">Task {{ i + 1 }}/{{ tasks.length }}</small>
+              <p class="mb-1">{{ task.description }}</p>
+            </div>
+            <div class="swipe-actions">
+              <button class="btn btn-danger" (click)="onDelete(task)">Delete</button>
+              <button class="btn btn-warning" (click)="onEdit(task)">Edit</button>
+            </div>
           </li>
         </ul>
       </div>

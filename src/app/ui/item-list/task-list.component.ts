@@ -74,4 +74,21 @@ export class TaskListComponent implements OnInit {
       modal.hide();
     }
   }
+
+  onSwipeLeft(task: Task) {
+    // task.swipedLeft = true; // Mark the task as swiped
+  }
+
+  onSwipeRight(task: Task) {
+    // task.swipedLeft = false; // Reset swipe action
+  }
+
+  onDelete(task: Task) {
+    // this.store.dispatch(TaskActions.deleteTask({ taskId: task.id }));
+  }
+
+  onEdit(task: Task) {
+    // Logic to open the modal and populate fields for editing the task
+    // For instance, setting modal fields to task's current values
+  }
 }
