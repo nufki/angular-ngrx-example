@@ -4,9 +4,9 @@
       "id": "a1b2",
       "name": "Implement User Authentication",
       "description": "Set up user authentication using JWT, including login, registration, and session handling.",
-      "status": "in-progress",
-      "priority": "high",
-      "dueDate": "2024-11-20"
+      "status": "completed",
+      "priority": "medium",
+      "dueDate": "2024-11-29"
     },
     {
       "id": "c3d4",
@@ -21,7 +21,7 @@
       "name": "Optimize Database Queries",
       "description": "Review and optimize SQL queries for better performance on high-traffic product pages.",
       "status": "in-progress",
-      "priority": "medium",
+      "priority": "high",
       "dueDate": "2024-12-01"
     },
     {
@@ -73,12 +73,12 @@
       "dueDate": "2024-12-10"
     },
     {
-      "id": "s9t0",
-      "name": "Conduct Security Audit",
-      "description": "Review codebase for vulnerabilities, implement best practices, and document findings.",
-      "status": "not-started",
+      "id": "64ad",
+      "name": "frontend refactoring",
+      "description": "asydasdfasdf",
+      "status": "in-progress",
       "priority": "high",
-      "dueDate": "2024-12-15"
+      "dueDate": "2024-11-22"
     }
   ]
 }

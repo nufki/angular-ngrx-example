@@ -1,135 +1,73 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Task Management</h2>
-
-  <!-- Button to open Add Task Modal -->
-  <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addTaskModal">
-    Add New Task
-  </button>
-
-  <!-- Add Task Modal -->
-  <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="itemName" class="form-label">Name:</label>
-              <input
-                id="itemName"
-                type="text"
-                class="form-control"
-                [(ngModel)]="newTaskName"
-                name="itemName"
-                placeholder="Enter task name"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="itemDescription" class="form-label">Description:</label>
-              <textarea
-                id="itemDescription"
-                class="form-control"
-                rows="3"
-                [(ngModel)]="newTaskDescription"
-                name="itemDescription"
-                placeholder="Enter task description"
-              ></textarea>
-            </div>
-
-            <!-- Status Dropdown -->
-            <div class="mb-3">
-              <label for="taskStatus" class="form-label">Status:</label>
-              <select
-                id="taskStatus"
-                class="form-select"
-                [(ngModel)]="newTaskStatus"
-                name="taskStatus"
-              >
-                <option value="not-started">Not Started</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-
-            <!-- Priority Dropdown -->
-            <div class="mb-3">
-              <label for="taskPriority" class="form-label">Priority:</label>
-              <select
-                id="taskPriority"
-                class="form-select"
-                [(ngModel)]="newTaskPriority"
-                name="taskPriority"
-              >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-
-            <!-- Due Date Datepicker -->
-            <div class="mb-3">
-              <label for="dueDate" class="form-label">Due Date:</label>
-              <input
-                type="date"
-                id="dueDate"
-                class="form-control"
-                [(ngModel)]="newTaskDueDate"
-                name="dueDate"
-              />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="onAddTask()">Add Task</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Loading Spinner and Task List (unchanged) -->
-  @if (loading$ | async) {
+@if (loading) {
   <div class="d-flex justify-content-center my-4">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  }
-  @else {
-    <div *ngIf="tasks$ | async as tasks" class="card shadow-sm">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <p class="mb-0">Total tasks: <strong>{{ tasks.length }}</strong></p>
-          <button (click)="onReverseOrder()" class="btn btn-outline-secondary">
-            Reverse Order
-          </button>
-        </div>
-        <ul class="list-group">
-          <li *ngFor="let task of tasks; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-            <!-- Task Name and Priority -->
-            <div class="task-info">
-              <h5 class="mb-1">{{ task.name }}</h5>
-              <small class="text-muted">Priority: {{ task.priority }}</small>
-            </div>
+} @else {
+  @if (tasks && tasks.length > 0) {
+    <div class="m-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <p class="mb-0">Total tasks: <strong>{{ tasks.length }}</strong></p>
 
-            <!-- Dot Menu for Details, Edit, Delete -->
-            <div class="dropdown">
-              <button class="btn btn-sm btn-link" type="button" id="taskOptionsMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots"></i>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="taskOptionsMenu">
-                <li><a class="dropdown-item" href="#" (click)="onViewDetails(task)">View Details</a></li>
-                <li><a class="dropdown-item" href="#" (click)="onEditTask(task)">Edit</a></li>
-                <li><a class="dropdown-item" href="#" (click)="onDeleteTask(task)">Delete</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <div class="col-9 d-flex justify-content-end align-items-center gap-2">
+        <label for="sortingDropdown">Sorting:</label>
+        <select id="sortingDropdown" class="form-select w-auto me-2"
+                [(ngModel)]="sortingType"
+                (change)="sortTasks.emit(sortingType)">
+          <option [value]="SortingType.HIGHEST_PRIO">Sort by Priority</option>
+          <option [value]="SortingType.DUE_DATE">Sort by Due Date</option>
+          <option [value]="SortingType.STATUS">Sort by Status</option>
+        </select>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+        </div>
+
+        <!--        <div>-->
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.HIGHEST_PRIO)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.HIGHEST_PRIO, 'text-white': sortingType === SortingType.HIGHEST_PRIO }">-->
+<!--            Sort by Priority-->
+<!--          </button>-->
+
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.DUE_DATE)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.DUE_DATE, 'text-white': sortingType === SortingType.DUE_DATE }">-->
+<!--            Sort by Due Date-->
+<!--          </button>-->
+
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.STATUS)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.STATUS, 'text-white': sortingType === SortingType.STATUS }">-->
+<!--            Sort by Status-->
+<!--          </button>-->
+<!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>-->
+<!--        </div>-->
       </div>
+
+      <!-- Task Table -->
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let task of tasks" [routerLink]="['/tasks', task.id]" class="cursor-pointer">
+          <td>{{ task.name }}</td>
+          <td>{{ task.dueDate | date }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.status }}</td>
+        </tr>
+        </tbody>
+      </table>
+
     </div>
   }
-</div>
+}

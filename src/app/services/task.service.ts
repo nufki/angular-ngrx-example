@@ -9,7 +9,8 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class TaskService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   public fetchAllTasks(): Observable<Task[]> {
     return this.http.get<any[]>(environment.taskAPIUrl).pipe(
@@ -45,8 +46,8 @@ export class TaskService {
     );
   }
 
-  public updateTask(id: string, item: Task): Observable<Task> {
-    return this.http.put<any>(`${environment.taskAPIUrl}/${id}`, item).pipe(
+  public updateTask(task: Task): Observable<Task> {
+    return this.http.put<any>(`${environment.taskAPIUrl}/${task.id}`, task).pipe(
       tap(response => console.log('Server response for updateTask:', response)),
       map(response => this.mapToModelSingle(response))
     );

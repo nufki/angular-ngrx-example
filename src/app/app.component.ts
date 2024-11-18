@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {TaskListComponent} from "./ui/task-list/task-list.component";
+import {TaskManagerComponent} from "./task-manager/task-manager.component";
+import {RouterOutlet} from "@angular/router";
 
 
 @Component({
@@ -7,7 +9,9 @@ import {TaskListComponent} from "./ui/task-list/task-list.component";
   standalone: true,
   templateUrl: './app.component.html',
   imports: [
-    TaskListComponent
+    TaskListComponent,
+    TaskManagerComponent,
+    RouterOutlet
   ],
   styleUrl: './app.component.css'
 })

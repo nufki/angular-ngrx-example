@@ -10,13 +10,20 @@ export enum TaskStatus {
   Completed = 'completed'
 }
 
+export enum SortingType {
+  HIGHEST_PRIO = 'HIGHEST_PRIO',
+  STATUS = 'STATUS',
+  DUE_DATE = 'DUE_DATE'
+}
+
+
 export interface Task {
   id?: string;
   name: string;
   description: string;
   status: TaskStatus;
   priority: TaskPriority;
-  dueDate: string;
+  dueDate: Date;
 }
 
 
