@@ -10,29 +10,42 @@
       <div class="d-flex justify-content-between align-items-center mb-3">
         <p class="mb-0">Total tasks: <strong>{{ tasks.length }}</strong></p>
 
-        <div>
-          <button
-            (click)="sortTasks.emit(SortingType.HIGHEST_PRIO)"
-            class="btn btn-outline-secondary me-2"
-            [ngClass]="{ 'btn-secondary': sortingType === SortingType.HIGHEST_PRIO, 'text-white': sortingType === SortingType.HIGHEST_PRIO }">
-            Sort by Priority
-          </button>
+        <div class="col-9 d-flex justify-content-end align-items-center gap-2">
+        <label for="sortingDropdown">Sorting:</label>
+        <select id="sortingDropdown" class="form-select w-auto me-2"
+                [(ngModel)]="sortingType"
+                (change)="sortTasks.emit(sortingType)">
+          <option [value]="SortingType.HIGHEST_PRIO">Sort by Priority</option>
+          <option [value]="SortingType.DUE_DATE">Sort by Due Date</option>
+          <option [value]="SortingType.STATUS">Sort by Status</option>
+        </select>
 
-          <button
-            (click)="sortTasks.emit(SortingType.DUE_DATE)"
-            class="btn btn-outline-secondary me-2"
-            [ngClass]="{ 'btn-secondary': sortingType === SortingType.DUE_DATE, 'text-white': sortingType === SortingType.DUE_DATE }">
-            Sort by Due Date
-          </button>
-
-          <button
-            (click)="sortTasks.emit(SortingType.STATUS)"
-            class="btn btn-outline-secondary me-2"
-            [ngClass]="{ 'btn-secondary': sortingType === SortingType.STATUS, 'text-white': sortingType === SortingType.STATUS }">
-            Sort by Status
-          </button>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
         </div>
+
+        <!--        <div>-->
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.HIGHEST_PRIO)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.HIGHEST_PRIO, 'text-white': sortingType === SortingType.HIGHEST_PRIO }">-->
+<!--            Sort by Priority-->
+<!--          </button>-->
+
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.DUE_DATE)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.DUE_DATE, 'text-white': sortingType === SortingType.DUE_DATE }">-->
+<!--            Sort by Due Date-->
+<!--          </button>-->
+
+<!--          <button-->
+<!--            (click)="sortTasks.emit(SortingType.STATUS)"-->
+<!--            class="btn btn-outline-secondary me-2"-->
+<!--            [ngClass]="{ 'btn-secondary': sortingType === SortingType.STATUS, 'text-white': sortingType === SortingType.STATUS }">-->
+<!--            Sort by Status-->
+<!--          </button>-->
+<!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>-->
+<!--        </div>-->
       </div>
 
       <!-- Task Table -->
