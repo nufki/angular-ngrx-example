@@ -1,4 +1,4 @@
-import { provideState } from '@ngrx/store';
+import {provideState} from '@ngrx/store';
 import * as fromItems from './task.reducer';
 
 
