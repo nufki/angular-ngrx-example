@@ -16,7 +16,6 @@ export enum SortingType {
   DUE_DATE = 'DUE_DATE'
 }
 
-
 export interface Task {
   id?: string;
   name: string;

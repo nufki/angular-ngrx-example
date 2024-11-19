@@ -77,6 +77,8 @@ export const selectAllTasksSortedByDueDate = createSelector(
   }
 );
 
+// Note how the 3 selectors have been joined together... the first round will take longer whereas
+// all individual subsequent re-selects will be memoized and much faster than put all in a single selector...
 export const selectAllTasksSorted = createSelector(
   selectTasksState,
   selectAllTasksSortedByPriority,

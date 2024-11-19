@@ -12,6 +12,7 @@ export interface State extends EntityState<Task> {
   sortingType: SortingType;
 }
 
+// Since the tasks are stored as an array, I make use of ngrx Entity Adapter to reduce boiler-plate code...
 export const taskAdapter: EntityAdapter<Task> =
   createEntityAdapter<Task>();
 

@@ -53,7 +53,6 @@ export class TaskEffects implements OnInitEffects {
     {functional: true}
   );
 
-  // Effect to delete a task
   deleteTask$ = createEffect(() =>
       this.actions$.pipe(
         ofType(TaskActions.deleteTask),
@@ -68,6 +67,7 @@ export class TaskEffects implements OnInitEffects {
     {functional: true}
   );
 
+  // This is a very clever & effective way to select the active route (since I use the router store)
   selectTaskFromRoute$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ROUTER_NAVIGATION),
