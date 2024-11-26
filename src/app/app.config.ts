@@ -2,13 +2,14 @@ import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
-import {provideHttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideState, provideStore} from '@ngrx/store';
 import {provideStoreDevtools} from '@ngrx/store-devtools';
 import {provideRouterStore, routerReducer} from "@ngrx/router-store";
 import {provideEffects} from '@ngrx/effects';
 import {TaskEffects} from "./+state/task.effects";
 import {STATE_PROVIDERS} from "./+state/feature-state.providers";
+import {jwtInterceptor } from "./jwt.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,8 +26,13 @@ export const appConfig: ApplicationConfig = {
     provideState({name: 'router', reducer: routerReducer}),
     provideRouterStore({}),
     provideStoreDevtools({}),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([ jwtInterceptor ]),
+    ),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
   ]
 };
+
+
+

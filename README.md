@@ -40,3 +40,4 @@ npm install -g json-server
 json-server --watch db.json --port 3000
 ```
 
+amplify docu: https://docs.amplify.aws/angular/build-a-backend/auth/connect-your-frontend/manage-user-sessions/
